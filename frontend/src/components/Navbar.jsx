@@ -7,7 +7,9 @@ function Navbar() {
 	const [visible, setVisible] = React.useState(false);
 	return (
 		<div className="flex items-center text-3xl w-full py-7 justify-between font-medium  ">
-			<img src={assets.logo} className="w-16" alt="Logo" />
+			<Link className="cursor-pointer" to="/">
+				<img src={assets.logo} className="w-16" alt="Logo" />
+			</Link>
 			<ul className="hidden sm:flex gap-5 text-[14px] text-gray-700">
 				<NavLink to="/" className="cursor:pointer">
 					<p>HOME</p>
