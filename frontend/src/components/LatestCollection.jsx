@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ProductItem from "./ProductItem";
 import { ShopContext } from "../context/ShopContext";
+import Title from "./Title";
 
 function LatestCollection() {
 	const [latestProducts, setLatestProducts] = React.useState([]);
@@ -17,11 +18,14 @@ function LatestCollection() {
 	}
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 py-6 ">
-			{latestProducts.map((item, index) => (
-				<ProductItem key={index} item={item} />
-			))}
-		</div>
+		<>
+			<Title text1={"LATEST"} text2={"COLLECTIONS"} />
+			<div className="grid grid-cols-2 w-fit mx-auto sm:grid-cols-3 md:grid-cols-4 gap-5 py-7 ">
+				{latestProducts.map((item, index) => (
+					<ProductItem key={index} item={item} />
+				))}
+			</div>
+		</>
 	);
 }
 

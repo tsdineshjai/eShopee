@@ -8,14 +8,17 @@ function ProductItem({ item }) {
 	const { name, price, image } = item;
 
 	return (
-		<Link className=" text-gray-700 cursor-pointer to={`/product/${item._id}`} border pb-1 rounded-sm ">
+		<Link
+			to={`/product/${item._id}`}
+			className=" text-gray-700 cursor-pointer  border pb-1 rounded-sm "
+		>
 			<div className="overflow-hidden"></div>
 			<img
 				src={image[0]}
 				alt=""
 				className="hover:scale-110 transition ease-in-out"
 			/>
-			<p className="text-[12px] pb-1 pt-3 px-1 font-medium">{name}</p>
+			<p className="text-[12px] pb-1 pt-3 px-1 font-normal">{name}</p>
 			<p className="text-[11px] px-1  font-semibold">
 				{price}
 				{currency}
