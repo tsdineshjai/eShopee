@@ -33,8 +33,8 @@ function Navbar() {
 
 				<div className="group relative">
 					<img src={assets.profile_icon} className="w-4 cursor-pointer" />
-					<div className="hidden  group-hover:block absolute dropdown-menu right-0 ">
-						<div className="flex flex-col w-36 text-sm py-3 items-end right-0 p-1 mt-2 bg-transparent text-gray-500 rounded">
+					<div className="hidden group-hover:block absolute dropdown-menu right-0 ">
+						<div className="flex flex-col w-24 text-[22px]  items-end right-0 p-1 mt-1 bg-transparent text-gray-500 rounded">
 							<p className="text-sm cursor-pointer hover:text-black  ">
 								My Profile
 							</p>

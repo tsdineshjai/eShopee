@@ -7,7 +7,7 @@ function Subscribe() {
 		e.preventDefault();
 	}
 	return (
-		<div className="flex flex-col px-5 py-2 mb-2 mt-5 justify-content items-center gap-2">
+		<div className="flex flex-col px-5 py-2 mb-2 mt-7 justify-content items-center gap-2 ">
 			<p className="text-[12px] sm:text-[18px]">Subscribe Now & get 20% off</p>
 			<p className="text-[10px] sm:text-[14px] font-light">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, ab.

@@ -21,7 +21,7 @@ function ProductItem({ item }) {
 			<p className="text-[12px] pb-1 pt-3 px-1 font-normal">{name}</p>
 			<p className="text-[11px] px-1  font-semibold">
 				{price}
-				{currency}
+				<small className="pl-1">{currency}</small>
 			</p>
 		</Link>
 	);
