@@ -10,6 +10,7 @@ const Collections = () => {
 
 	const [category, setCategory] = React.useState([]);
 	const [subCategory, setSubCategory] = React.useState([]);
+	const [sorting, setSorting] = React.useState("");
 
 	const handleCatergoryChange = (e) => {
 		const { name, checked } = e.target;
@@ -24,9 +25,28 @@ const Collections = () => {
 		});
 	};
 
+	const sortedProducts = React.useMemo(() => {
+		const productsCopy = [...filterdProducts];
+
+		switch (sorting) {
+			case "lowToHigh": {
+				return productsCopy.sort((a, b) => a.price - b.price);
+			}
+			case "highToLow": {
+				return productsCopy.sort((a, b) => b.price - a.price);
+			}
+			default: {
+				return products;
+			}
+		}
+	}, [sorting, filterdProducts, products]);
+
+	React.useEffect(() => {
+		setFilteredProducts(sortedProducts);
+	}, [sortedProducts]);
+
 	React.useEffect(() => {
 		let filtered = products;
-
 		if (category.length > 0) {
 			filtered = filtered.filter((product) =>
 				category.includes(product.category)
@@ -37,7 +57,6 @@ const Collections = () => {
 				subCategory.includes(product.subCategory)
 			);
 		}
-
 		setFilteredProducts(filtered);
 	}, [products, category, subCategory]);
 
@@ -140,10 +159,12 @@ const Collections = () => {
 					<select
 						name="sorting"
 						className="bg-white mx-auto sm:mx-0 border-2 border-gray-300 px-2 text-gray-700 text-sm "
+						value={sorting}
+						onChange={(e) => setSorting(e.target.value)}
 					>
-						<option value="Relevant">Relevant</option>
-						<option value="LOW-HIGH">Price: Low to High</option>
-						<option value="HIGH-LOW">Price: High to Low</option>
+						<option value="relevant">Relevant</option>
+						<option value="lowToHigh">Price: Low to High</option>
+						<option value="highToLow">Price: High to Low</option>
 					</select>
 				</div>
 
