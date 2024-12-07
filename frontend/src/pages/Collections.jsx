@@ -8,9 +8,39 @@ const Collections = () => {
 	const [filterdProducts, setFilteredProducts] = React.useState([]);
 	const [isFilter, setIsFilter] = React.useState(true);
 
+	const [category, setCategory] = React.useState([]);
+	const [subCategory, setSubCategory] = React.useState([]);
+
+	const handleCatergoryChange = (e) => {
+		const { name, checked } = e.target;
+		setCategory((prev) => {
+			return checked ? [...prev, name] : prev.filter((value) => value !== name);
+		});
+	};
+	const handleSubCategoryChange = (e) => {
+		const { name, checked } = e.target;
+		setSubCategory((prev) => {
+			return checked ? [...prev, name] : prev.filter((value) => value !== name);
+		});
+	};
+
 	React.useEffect(() => {
-		setFilteredProducts(products);
-	}, [products]);
+		let filtered = products;
+
+		if (category.length > 0) {
+			filtered = filtered.filter((product) =>
+				category.includes(product.category)
+			);
+		}
+		if (subCategory.length > 0) {
+			filtered = filtered.filter((product) =>
+				subCategory.includes(product.subCategory)
+			);
+		}
+
+		setFilteredProducts(filtered);
+	}, [products, category, subCategory]);
+
 	return (
 		<div className="mt-7 flex flex-col sm:flex-row gap-1 p-1">
 			{/* left side : FILTER */}
@@ -36,13 +66,31 @@ const Collections = () => {
 				>
 					<p className="font-medium mb-3">CATEGORIES</p>
 					<label htmlFor="Men" className="text-[14px] font-light ">
-						<input type="checkbox" name="Men" id="Men" /> Men
+						<input
+							type="checkbox"
+							name="Men"
+							id="Men"
+							onChange={handleCatergoryChange}
+						/>{" "}
+						Men
 					</label>
 					<label htmlFor="Women" className="text-[14px] font-light">
-						<input type="checkbox" name="Women" id="Women" /> Women
+						<input
+							type="checkbox"
+							name="Women"
+							id="Women"
+							onChange={handleCatergoryChange}
+						/>{" "}
+						Women
 					</label>
 					<label htmlFor="kids" className="text-[14px] font-light">
-						<input type="checkbox" name="kids" id="kids" /> Kids
+						<input
+							type="checkbox"
+							id="kids"
+							name="Kids"
+							onChange={handleCatergoryChange}
+						/>{" "}
+						Kids
 					</label>
 				</div>
 
@@ -53,20 +101,36 @@ const Collections = () => {
 				>
 					<p className="font-medium mb-3">TYPE</p>
 					<label htmlFor="Topwear" className="text-[14px] font-light">
-						<input type="checkbox" name="Topwear" id="Topwear" /> Topwear
+						<input
+							type="checkbox"
+							name="Topwear"
+							id="Topwear"
+							onChange={handleSubCategoryChange}
+						/>{" "}
+						Topwear
 					</label>
 					<label htmlFor="Bottomwear" className="text-[14px] font-light">
-						<input type="checkbox" name="Bottomwear" id="Bottomwear" />{" "}
+						<input
+							type="checkbox"
+							name="Bottomwear"
+							id="Bottomwear"
+							onChange={handleSubCategoryChange}
+						/>{" "}
 						Bottomwear
 					</label>
 					<label htmlFor="Winterwear" className="text-[14px] font-light">
-						<input type="checkbox" name="Winterwear" id="Winterwear" />{" "}
+						<input
+							type="checkbox"
+							name="Winterwear"
+							id="Winterwear"
+							onChange={handleSubCategoryChange}
+						/>{" "}
 						Winterwear
 					</label>
 				</div>
 			</div>
 			{/* collection of products */}
-			<section >
+			<section>
 				<div className=" flex items-center justify-between px-3">
 					<div className="hidden  sm:flex flex-row justify-center items-center gap-3">
 						<p className="text-green-600">ALL</p>
