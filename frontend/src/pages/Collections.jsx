@@ -12,6 +12,8 @@ const Collections = () => {
 	const [subCategory, setSubCategory] = React.useState([]);
 	const [sorting, setSorting] = React.useState("");
 
+	const { search } = useShopContext();
+
 	const handleCatergoryChange = (e) => {
 		const { name, checked } = e.target;
 		setCategory((prev) => {
@@ -47,6 +49,12 @@ const Collections = () => {
 
 	React.useEffect(() => {
 		let filtered = products;
+
+		if (search) {
+			filtered = filtered.filter((product) =>
+				product.name.toLowerCase().includes(search.toLowerCase())
+			);	
+		}
 		if (category.length > 0) {
 			filtered = filtered.filter((product) =>
 				category.includes(product.category)
@@ -58,7 +66,7 @@ const Collections = () => {
 			);
 		}
 		setFilteredProducts(filtered);
-	}, [products, category, subCategory]);
+	}, [products, category, subCategory, search]);
 
 	return (
 		<div className="mt-7 flex flex-col sm:flex-row gap-1 p-1">
