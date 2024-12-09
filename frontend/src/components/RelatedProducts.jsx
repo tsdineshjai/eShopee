@@ -20,8 +20,6 @@ function RelatedProducts({ category, subCategory }) {
 		}
 	}, [category, subCategory, products]);
 
-	console.log("related prods is ", relatedProds);
-
 	return products ? (
 		<div className="my-10">
 			<div className="">

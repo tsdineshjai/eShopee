@@ -5,7 +5,7 @@ import { assets } from "../assets/assets";
 import RelatedProducts from "../components/RelatedProducts";
 
 function Product() {
-	const { products, currency } = useShopContext();
+	const { products, currency, handleAddToCartData } = useShopContext();
 	const [itemInfo, setItemInfo] = React.useState();
 	const [centerImage, setCenterImage] = React.useState();
 	const [selectedSize, setSelectedSize] = React.useState();
@@ -85,7 +85,10 @@ function Product() {
 						</div>
 					</section>
 
-					<button className="bg-black mt-2 mb-5  active:bg-gray-700  flex items-center justify-center w-fit text-white px-3 py-2  rounded-sm hover:scale-105 transition-transform duration-300 ease-in-out">
+					<button
+						onClick={() => handleAddToCartData(itemInfo._id, selectedSize)}
+						className="bg-black mt-2 mb-5  active:bg-gray-700  flex items-center justify-center w-fit text-white px-3 py-2  rounded-sm hover:scale-105 transition-transform duration-300 ease-in-out"
+					>
 						ADD TO CART
 					</button>
 

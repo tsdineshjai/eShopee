@@ -6,8 +6,7 @@ import useShopContext from "../hooks/useShopContext";
 
 function Navbar() {
 	const [visible, setVisible] = React.useState(false);
-
-	const { setShowSearch } = useShopContext();
+	const { setShowSearch, getCartCount } = useShopContext();
 
 	return (
 		<div className="flex items-center text-3xl w-full py-7 justify-between font-medium  ">
@@ -55,7 +54,7 @@ function Navbar() {
 				<Link to="/cart" className="relative">
 					<img src={assets.cart_icon} alt="cart" className="w-4  min-w-4" />
 					<p className=" right-[-10px] mt-[-10px]  flex items-center justify-center text-center leading-4 w-4 text-[10px] aspect-square absolute rounded-full bg-black text-white">
-						10
+						{getCartCount()}
 					</p>
 				</Link>
 				<img
