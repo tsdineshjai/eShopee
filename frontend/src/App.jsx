@@ -26,7 +26,7 @@ const App = () => {
 				<Route path="/login" element={<Login />} />
 				<Route path="/orders" element={<Orders />} />
 				<Route path="/placeorder" element={<Placeorder />} />
-				<Route path="/product" element={<Product />} />
+				<Route path="/product/:productId" element={<Product />} />
 			</Routes>
 			<Footer />
 		</div>
