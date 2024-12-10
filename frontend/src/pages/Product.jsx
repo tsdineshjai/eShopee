@@ -11,6 +11,7 @@ function Product() {
 	const [selectedSize, setSelectedSize] = React.useState();
 	const { productId } = useParams();
 
+	console.log(itemInfo);
 	React.useEffect(() => {
 		const item = products.find((product) => product._id == productId);
 		if (item) {

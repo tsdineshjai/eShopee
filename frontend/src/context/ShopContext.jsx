@@ -8,7 +8,6 @@ export const ShopContext = createContext(null);
 function ShopContextProvider(props) {
 	const [search, setSearch] = React.useState("");
 	const [showSearch, setShowSearch] = React.useState(false);
-
 	const [cartData, setCartData] = React.useState({});
 
 	const handleAddToCartData = async (itemId, size) => {
@@ -28,19 +27,28 @@ function ShopContextProvider(props) {
 			data[itemId] = {};
 			data[itemId][size] = 1;
 		}
-
 		setCartData(data);
 	};
 
 	const getCartCount = () => {
 		let totalValue = 0;
-
 		for (let [, val] of Object.entries(cartData)) {
 			for (let [, value] of Object.entries(val)) {
 				totalValue += value;
 			}
 		}
 		return totalValue;
+	};
+
+	const handleChangeInQuantity = (itemId, size, updatedQuantity) => {
+		const copyCartData = structuredClone(cartData);
+		copyCartData[itemId][size] = Number(updatedQuantity);
+		setCartData(copyCartData);
+	};
+
+	const handleDeleteItem = (itemId) => {
+		let copyCartData = structuredClone(cartData);
+		delete copyCartData[itemId];
 	};
 
 	React.useEffect(() => {
@@ -60,6 +68,8 @@ function ShopContextProvider(props) {
 		cartData,
 		handleAddToCartData,
 		getCartCount,
+		handleChangeInQuantity,
+		handleDeleteItem,
 	};
 	return (
 		<ShopContext.Provider value={value}>{props.children} </ShopContext.Provider>
