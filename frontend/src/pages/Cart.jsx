@@ -2,6 +2,8 @@ import React, { useCallback } from "react";
 import useShopContext from "../hooks/useShopContext";
 import Title from "../components/Title";
 import { assets } from "../assets/assets";
+import { toast } from "react-toastify";
+import CartTotal from "../components/CartTotal";
 
 function Cart() {
 	const {
@@ -12,6 +14,7 @@ function Cart() {
 		handleDeleteItem,
 		getTotalCartAmount,
 		delivery_fee,
+		navigate,
 	} = useShopContext();
 
 	const [cartItems, setCartItems] = React.useState([]);
@@ -110,7 +113,7 @@ function Cart() {
 				)}
 
 				<div className="mx-auto mt-5  py-6">
-					<div className="flex w-full sm:w-[400px] flex-col  px-10 ">
+					{/* <div className="flex w-full sm:w-[400px] flex-col  px-10 ">
 						<Title text1={"CART"} text2={"TOTALS"} />
 
 						<div className="flex flex-row justify-between border-b py-2 mt-5  px-4">
@@ -149,13 +152,21 @@ function Cart() {
 								</span>
 							</div>
 						</div>
-
 						<div className="mt-5 mx-auto hover:scale-105 transition-transform ease-linear delay-0">
-							<button className="bg-black px-3 py-2 text-[14px] text-white rounded-sm active:bg-gray-700">
+							<button
+								onClick={() =>
+									getTotalCartAmount() == 0
+										? toast("Add items to the cart")
+										: navigate("/placeorder")
+								}
+								className="bg-black px-3 py-2 text-[14px] text-white rounded-sm active:bg-gray-700"
+							>
 								PROCEED TO CHECKOUT
 							</button>
 						</div>
-					</div>
+					</div> */}
+
+					<CartTotal />
 				</div>
 			</div>
 		</div>

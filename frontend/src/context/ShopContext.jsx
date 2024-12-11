@@ -3,12 +3,15 @@
 import React, { createContext } from "react";
 import { products } from "../assets/assets";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const ShopContext = createContext(null);
 function ShopContextProvider(props) {
 	const [search, setSearch] = React.useState("");
 	const [showSearch, setShowSearch] = React.useState(false);
 	const [cartData, setCartData] = React.useState({});
+
+	const navigate = useNavigate();
 
 	const handleAddToCartData = async (itemId, size) => {
 		if (!size) {
@@ -53,7 +56,6 @@ function ShopContextProvider(props) {
 	};
 
 	//to calucuate the total cart amount
-
 	const getTotalCartAmount = () => {
 		let totalAmount = 0;
 
@@ -64,14 +66,10 @@ function ShopContextProvider(props) {
 			);
 
 			//looping through the cartitem's  sizes to find the total price
-
 			for (const productSizes in cartData[productIds]) {
 				totalAmount += productMatch.price * cartData[productIds][productSizes];
 			}
 		}
-
-		console.log(totalAmount);
-
 		return totalAmount;
 	};
 
@@ -95,6 +93,7 @@ function ShopContextProvider(props) {
 		handleChangeInQuantity,
 		handleDeleteItem,
 		getTotalCartAmount,
+		navigate,
 	};
 	return (
 		<ShopContext.Provider value={value}>{props.children} </ShopContext.Provider>
