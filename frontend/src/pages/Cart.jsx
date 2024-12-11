@@ -13,7 +13,6 @@ function Cart() {
 		handleChangeInQuantity,
 		handleDeleteItem,
 		getTotalCartAmount,
-		delivery_fee,
 		navigate,
 	} = useShopContext();
 
@@ -167,6 +166,18 @@ function Cart() {
 					</div> */}
 
 					<CartTotal />
+					<div className="mt-5 hover:scale-105 transition-transform ease-linear delay-0 text-center">
+						<button
+							onClick={() =>
+								getTotalCartAmount() == 0
+									? toast("Add items to the cart")
+									: navigate("/placeorder")
+							}
+							className="bg-black px-3 py-2 text-[14px] text-white rounded-sm active:bg-gray-700"
+						>
+							PROCEED TO CHECKOUT
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -39,7 +39,7 @@ function CartTotal() {
 					</span>
 				</div>
 			</div>
-			<div className="mt-5 mx-auto hover:scale-105 transition-transform ease-linear delay-0">
+			{/* <div className="mt-5 mx-auto hover:scale-105 transition-transform ease-linear delay-0">
 				<button
 					onClick={() =>
 						getTotalCartAmount() == 0
@@ -50,7 +50,7 @@ function CartTotal() {
 				>
 					PROCEED TO CHECKOUT
 				</button>
-			</div>
+			</div> */}
 		</div>
 	);
 }

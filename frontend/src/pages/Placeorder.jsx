@@ -2,13 +2,15 @@ import React from "react";
 import { assets } from "../assets/assets";
 import CartTotal from "../components/CartTotal";
 import Title from "../components/Title";
+import useShopContext from "../hooks/useShopContext";
 
 function Placeorder() {
 	const [paymentType, setPaymentType] = React.useState("");
+	const { navigate } = useShopContext();
 	return (
 		<div>
 			<div className="flex flex-col sm:flex-col gap-4 flex-start">
-				<div className=" mx-auto w-full sm:w-fit sm:block">
+				<div className=" w-full sm:w-fit flex flex-start  ">
 					<Title text1={"Delivery"} text2={"Information"} />
 				</div>
 
@@ -128,6 +130,15 @@ function Placeorder() {
 									<p className="text-gray-600  text-[14px]">CASH ON DELIVERY</p>
 								</div>
 							</div>
+						</div>
+
+						<div className="mt-5 hover:scale-105 transition-transform ease-linear delay-0 text-center">
+							<button
+								onClick={() => navigate("/orders")}
+								className="bg-black px-3 py-2 text-[14px] text-white rounded-sm active:bg-gray-700"
+							>
+								PROCEED TO CHECKOUT
+							</button>
 						</div>
 					</div>
 				</div>
