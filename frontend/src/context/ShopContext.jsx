@@ -46,9 +46,33 @@ function ShopContextProvider(props) {
 		setCartData(copyCartData);
 	};
 
-	const handleDeleteItem = (itemId) => {
+	const handleDeleteItem = (itemId, size) => {
 		let copyCartData = structuredClone(cartData);
-		delete copyCartData[itemId];
+		delete copyCartData[itemId][size];
+		setCartData({ ...copyCartData });
+	};
+
+	//to calucuate the total cart amount
+
+	const getTotalCartAmount = () => {
+		let totalAmount = 0;
+
+		for (const productIds in cartData) {
+			//finding the item in list of products via productId to know the price of an item
+			const productMatch = products.find(
+				(product) => product._id == productIds
+			);
+
+			//looping through the cartitem's  sizes to find the total price
+
+			for (const productSizes in cartData[productIds]) {
+				totalAmount += productMatch.price * cartData[productIds][productSizes];
+			}
+		}
+
+		console.log(totalAmount);
+
+		return totalAmount;
 	};
 
 	React.useEffect(() => {
@@ -70,6 +94,7 @@ function ShopContextProvider(props) {
 		getCartCount,
 		handleChangeInQuantity,
 		handleDeleteItem,
+		getTotalCartAmount,
 	};
 	return (
 		<ShopContext.Provider value={value}>{props.children} </ShopContext.Provider>
