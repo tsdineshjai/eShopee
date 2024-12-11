@@ -1,10 +1,11 @@
 import Title from "../components/Title";
 import { assets } from "../assets/assets";
+import Subscribe from "../components/Subscribe";
 
 function About() {
 	return (
 		<div className="flex flex-col md:flex-col gap-5">
-			<div>
+			<div className="pt-5 border-t">
 				<Title text1={"ABOUT"} text2={"US"} />
 			</div>
 
@@ -67,6 +68,8 @@ function About() {
 					</p>
 				</div>
 			</div>
+
+			<Subscribe />
 		</div>
 	);
 }
