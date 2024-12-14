@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 
 import connectDB from "./config/mongodb.js";
+import cloudinaryConnect from "./config/cloudinary.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,11 @@ console.log(process.env.MONGODB_URI);
 
 try {
 	connectDB();
+} catch (e) {
+	console.error(e.message);
+}
+try {
+	cloudinaryConnect();
 } catch (e) {
 	console.error(e.message);
 }
