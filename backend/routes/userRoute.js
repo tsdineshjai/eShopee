@@ -3,7 +3,7 @@ import {
 	adminUser,
 	loginUser,
 	registerUser,
-} from "../controllers/userController";
+} from "../controllers/userController.js";
 
 //creates a  mini exprss app within a express applicaiton
 const userRouter = express.Router();
