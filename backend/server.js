@@ -4,6 +4,7 @@ import "dotenv/config";
 
 import connectDB from "./config/mongodb.js";
 import cloudinaryConnect from "./config/cloudinary.js";
+import userRouter from "./routes/userRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-console.log(process.env.MONGODB_URI);
+app.use("/api/user", userRouter);
 
 try {
 	connectDB();
