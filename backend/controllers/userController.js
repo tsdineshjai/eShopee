@@ -7,7 +7,58 @@ const createToken = (id) => {
 	return jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: "1d" });
 };
 
-const loginUser = async (req, res) => {};
+const loginUser = async (req, res) => {
+	try {
+		const { email, password } = req.body;
+
+		// Validate email format
+		if (!email || !validator.isEmail(email)) {
+			return res.status(400).json({
+				success: false,
+				message: "Please provide a valid email address.",
+			});
+		}
+
+		//we will check if user exists
+		const user = await userModel.findOne({ email });
+
+		if (!user) {
+			return res.status(404).json({
+				success: false,
+				message: "User doesn't exist. Please create an account.",
+			});
+		}
+
+		// Check if the provided password matches the stored hashed password
+		const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+		if (!isPasswordMatch) {
+			return res.status(401).json({
+				success: false,
+				message: "Invalid credentials. Please try again.",
+			});
+		}
+
+		const token = createToken(user._id);
+
+		if (!token) {
+			return res.status(500).json({
+				success: false,
+				message: "Failed to generate authentication token.",
+			});
+		}
+		res.status(200).json({
+			success: true,
+			token,
+			message: "Login successful!",
+		});
+	} catch (e) {
+		res.status(500).json({
+			success: false,
+			message: `error has occurred due to the reason : ${e.message}`,
+		});
+	}
+};
 const registerUser = async (req, res) => {
 	try {
 		const { email, username, password } = req.body;
@@ -75,5 +126,4 @@ Key Takeaways:
     Add return statements after validation checks to ensure the function halts on errors.
     Include proper HTTP status codes in responses for API best practices.
     Set expiration times for JWT tokens to enhance security.
-
 */
